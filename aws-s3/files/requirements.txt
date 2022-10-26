@@ -1,0 +1,6 @@
+###### Requirements ######
+awscli
+redshift_connector
+botocore
+boto3
+aws_secretsmanager_caching
