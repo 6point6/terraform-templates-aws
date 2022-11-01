@@ -5,7 +5,7 @@ variable "notebook_name" {
 
 variable "ec2_instance_type" {
   type    = string
-  default = "ml.t2.large"
+  default = "ml.t3.xlarge"
 }
 
 variable "iam_role" {
