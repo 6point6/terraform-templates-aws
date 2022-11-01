@@ -3,6 +3,15 @@
 # ======================================================================================================================
 
 
+resource "aws_sagemaker_code_repository" "demo_notebooks" {
+  code_repository_name = "demo-notebooks"
+
+  git_config {
+    repository_url = "https://github.com/6point6/terraform-templates-aws.git"
+    branch         = "demo-notebooks"
+  }
+}
+
 resource "aws_sagemaker_notebook_instance" "notebook_instance" {
   name                = var.notebook_name
   role_arn            = var.iam_role
@@ -11,4 +20,7 @@ resource "aws_sagemaker_notebook_instance" "notebook_instance" {
   subnet_id           = var.subnet_1
   platform_identifier = "notebook-al2-v2"
   volume_size         = 16
+
+  default_code_repository = aws_sagemaker_code_repository.demo_notebooks.code_repository_name
+
 }
