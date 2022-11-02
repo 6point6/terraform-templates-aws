@@ -20,8 +20,8 @@ module "aws-glue-job" {
   aws_default_security_group = module.common-connections.aws_default_security_group
   s3_bucket_name             = module.aws-s3.s3_bucket_name
   glue_job_file              = "glue_job_file.py"
-  source_bucket              = "data-profiler-output" #rename source bucket
-  source_files               = "synthetic-islands"    #rename source files
+  source_bucket              = "ds-demo-tools"   #rename source bucket
+  source_files               = "pp-complete.txt" #rename source files
   subnet_region_1            = module.common-connections.subnet_region_1
 }
 
