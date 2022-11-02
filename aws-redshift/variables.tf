@@ -1,11 +1,11 @@
 variable "redshiftserverless_namespace" {
   type    = string
-  default = "ds-namespace-2"
+  default = "ds-namespace"
 }
 
 variable "redshiftserverless_workgroup" {
   type    = string
-  default = "ds-workgroup-2"
+  default = "ds-workgroup"
 }
 
 variable "redshift_db_name" {
