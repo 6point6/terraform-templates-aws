@@ -38,7 +38,7 @@ resource "aws_glue_job" "ds_glue_job_ingestion" {
     "--rd_db_name"                       = var.redshift_db_name
     "--rd_db_user"                       = var.redshift_db_user
     "--source_bucket"                    = var.source_bucket
-    "--source_files"                     = "${var.source_files}/"
+    "--source_files"                     = var.source_files
     "--rs_password"                      = var.admin_user_password
     "--iam_role_redshift"                = var.redshift_role
     "--enable-continuous-cloudwatch-log" = "true"

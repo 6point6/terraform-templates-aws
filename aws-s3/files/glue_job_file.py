@@ -6,8 +6,8 @@ import redshift_connector
 # CONFIGURATION
 RS_SCHEMA = "public"
 RS_TABLE = "db_data"
-DELIMITER = "\n"
-REGION = "us-east-2"
+DELIMITER = ","
+REGION = "eu-west-2"
 
 # ARGUMENTS
 args = getResolvedOptions(
@@ -33,9 +33,10 @@ cursor = conn.cursor()
 
 cursor.execute("set statement_timeout = 360000")
 
-cursor.execute("CREATE TABLE IF NOT EXISTS %s (commons SUPER);" % (RS_TABLE))
+cursor.execute("CREATE TABLE IF NOT EXISTS %s (id VARCHAR,Price INTEGER,Purchase_date timestamp,Postcode VARCHAR,Col_1 CHAR,Col_2 CHAR,Col_3 CHAR,PAON VARCHAR,SAON VARCHAR,Street VARCHAR,Locality VARCHAR,Town_City VARCHAR,District VARCHAR,County VARCHAR,Col_4 CHAR,Col_5 CHAR);" % (RS_TABLE))
 
-copy_query = "COPY %s.%s from 's3://%s/%s' iam_role '%s' delimiter '%s'  GZIP REGION '%s';" % (
+
+copy_query = "COPY %s.%s from 's3://%s/%s' iam_role '%s' removequotes delimiter '%s' REGION '%s';" % (
     RS_SCHEMA, RS_TABLE, S3_BUCKET, S3_OBJECT, RS_IAM_ROLE, DELIMITER, REGION)
 
 cursor.execute(copy_query)
