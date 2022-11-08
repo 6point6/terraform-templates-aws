@@ -5,10 +5,10 @@
 # Local variables based on user inputs
 locals {
   artifacts = {
-    import_module_path  = join("", [var.code_base_path, "asn1crypto-1.5.1-py2.py3-none-any.whl"]),
-    import_module_path2 = join("", [var.code_base_path, "scramp-1.4.1-py3-none-any.whl"]),
-    import_module_path3 = join("", [var.code_base_path, "redshift_connector-2.0.909-py3-none-any.whl"]),
-    glue_job_file       = join("", [var.code_base_path, var.glue_job_file])
+    import_module_path  = join("", [var.path, "asn1crypto-1.5.1-py2.py3-none-any.whl"]),
+    import_module_path2 = join("", [var.path, "scramp-1.4.1-py3-none-any.whl"]),
+    import_module_path3 = join("", [var.path, "redshift_connector-2.0.909-py3-none-any.whl"]),
+    glue_job_file       = join("", [var.path, var.glue_job_file])
   }
 }
 
@@ -16,8 +16,7 @@ locals {
 
 # create S3 buckets
 resource "aws_s3_bucket" "create_buckets" {
-  bucket = var.tools_bucket
-  # acl           = "private"
+  bucket        = var.tools_bucket
   force_destroy = true
 }
 
