@@ -2,6 +2,7 @@ import os
 import pandas as pd
 import io
 import numpy as np
+import matplotlib.pyplot as plt
 
 from sklearn.linear_model import LinearRegression
 from sklearn.linear_model import LogisticRegression
@@ -15,7 +16,10 @@ from sklearn import preprocessing
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import HistGradientBoostingRegressor
+from sklearn.neural_network import MLPClassifier, MLPRegressor
 import sklearn
+
+
 
 STATES = ['Alaska',
           'California',
@@ -723,10 +727,13 @@ def train_neural_network(df,
                                                        target=target_feature, 
                                                        scaler=scaler, 
                                                        shuffle=True)
+        test_loss = []
         for i in range(100):
-            model.partial_fit(X_train, y_train)
+            model.partial_fit(X_train, y_train, verbose=False)
             if verbose:
-                print(f"${np.abs(model.predict(X_test) - y_test).mean():.2f}")
+                loss = np.abs((model.predict(X_test) - y_test)).mean()
+                test_loss += [loss]
+                print(f"Epoch {str(i).zfill(3)}/{250} : TRAIN : ${np.sqrt(model.loss_):.2f} TEST : ${loss:.2f}")
     
         results += [_regression_metrics(model, X_test, y_test, verbose=False)]
         models  += [model]
